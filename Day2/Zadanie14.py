@@ -1,5 +1,5 @@
 s = ()
-z=[]
+z = []
 ilosc = -1
 print("Możesz zakończyć wprowadzanie liczb pisząc STOP.")
 while s != ("STOP"):
@@ -12,6 +12,7 @@ while s != ("STOP"):
         ilosc+int(1)
     if s == ("STOP"):
         break
-print(ilosc)
 del z[ilosc]
-print (z)
+print (f"Wprowadzone liczby: {z}")
+print (f"Największa liczba: {max(z)}")
+print (f"Najmniejsza liczba: {min(z)}")
