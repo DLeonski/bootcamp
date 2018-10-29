@@ -1,12 +1,10 @@
 podaj = ()
 liczby = set()
-parzyste = set(range(0,100,2))
-while podaj != "stop":
+parzyste = set(range(0,101,2))
+while True:
     podaj = (input("Podaj liczby [stop]: "))
-    podaj = int(podaj)
+    if podaj == "stop":
+        break
     liczby.add(podaj)
-zgodnosc=0
-for i in liczby:
-    if i in liczby:
-        zgodnosc+=1
-print(zgodnosc)
+print(f"Unikalnych liczb: {len(liczby)}")
+print(f"W tym parzystych: {len(liczby & parzyste)}")
