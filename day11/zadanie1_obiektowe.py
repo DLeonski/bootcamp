@@ -9,6 +9,6 @@ class Product():
 
 
 produkt1 = Product("woda", 9, 10)
-produkt2 = Product("sqn", 420, 50)
+produkt2 = Product("piwo", 4, 2)
 produkt1.produkt_info()
 produkt2.produkt_info()
