@@ -1,16 +1,15 @@
 from random import randint
 from itemy import Item
 
+
 class Postac:
     def __init__(self, imie, atak, zdrowie):
         self.imie = imie
-        self.atak = atak
+        self._atak = atak
         self.zdrowie = zdrowie
         self.max_zdrowie = zdrowie
-        self.ekwipunek= []
+        self.ekwipunek = []
 
-    def przedstaw_sie(self):
-        print(f"Mam na imię {self.imie}, mam {self.atak} ataku i {self.zdrowie} HP.")
 
     def __str__(self):
         if self.stan_zdrowia():
@@ -36,7 +35,12 @@ class Postac:
             else:
                 print("Unik!")
 
-
+    @property
+    def atak(self):
+        wynik = self._atak
+        for i in self.ekwipunek:
+            wynik += i.staty
+        return wynik
 
     def stan_zdrowia(self):
         return self.zdrowie > 0
@@ -54,6 +58,11 @@ class Postac:
     def daj_item(self, przedmiot):
         self.ekwipunek.append(przedmiot)
 
+    def atak_plus(self):
+        wynik = self.atak
+        for i in self.ekwipunek:
+            wynik += i.staty    
+        return wynik
 
     @staticmethod
     def walka(atak, obrona):
@@ -69,8 +78,10 @@ class Postac:
         atak.ojcowska_lepa()
         obrona.ojcowska_lepa()
 
-kastet = Item("kastet",3)
+
+kastet = Item("kastet", 3)
 terca = Postac("Tomasz", 7, 100)
 janusz = Postac("Janusz", 5, 140)
-daj_item =(janusz, kastet)
+janusz.daj_item(kastet)
+print(f"bonus atk: {janusz.atak_plus()}")
 Postac.walka(terca, janusz)
