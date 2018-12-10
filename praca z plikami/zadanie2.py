@@ -1,26 +1,31 @@
 import sys
 
-login = {}
-end = {}
+user_last_login = {}
+user_total_time = {}
 with open(sys.argv[1]) as f:
-
-    for i in f:
-        i = i.split(";")
-        user = i[0]
-        action = i[1]
-        time = i[2]
-        time = int(time)
+    for line in f:
+        user, action, time_str = line.split(";")
+        time = int(time_str)
+        user = line[0]
+        action = line[1]
+        time = line[2]
 
         if action == "LOGIN":
-            login[user] = time
-        if action == "LOGOUT":
-            end[user] = end.get(user, 0) + time - login[user]
+            user_last_login[user] = time
+        elif action == "LOGOUT":
+            time_temp = time - user_last_login[user]
+            user_total_time[user] = user_total_time.get(user, 0) + time_temp
+
+for user, time in user_total_time.items():
+    print(f"- {user}: {time} s")
 
 
-
-def sort(x):
+def nazwa(x):
     return x[1]
 
+
+# #
 print("Czas przebywania: ")
-for s in sorted(login.items() ,key=lambda x: x[1], reverse=True):
- print (s)
+for user, time in sorted(user_total_time.items()):
+    print(f"{user}: {time} s")
+
