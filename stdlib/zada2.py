@@ -15,5 +15,7 @@ with urlopen(f'https://www.metaweather.com/api/location/{woeid}') as f:
 
 print(data)
 
-pogoda = data[0]["weather_state_name"]
+pogoda = data["consolidated_weather"]
+for prognozy in pogoda:
+    print(f"Dzień {prognozy}{[applicable_date]}")
 print(pogoda)
